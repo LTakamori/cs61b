@@ -1,8 +1,7 @@
 import java.lang.Math; 
-
-public class Planet{
-    private double xxPos, yyPos, xxVel, yyVel, mass;
-    private String imgFileName;
+    public class Planet{
+    public double xxPos, yyPos, xxVel, yyVel, mass;
+    public String imgFileName;
     private static double G = 6.67e-11;
 
     /** used for construct a Plnaet instance with an existing instance */
@@ -26,7 +25,7 @@ public class Planet{
     }
 
     /** used to calculate the distance between two planet */
-    private double calcDistance(Planet planet_y){
+    public double calcDistance(Planet planet_y){
         double dx = planet_y.xxPos - this.xxPos;
         double dy = planet_y.yyPos - this.yyPos;
         double r_2 = dx * dx + dy *dy;
@@ -35,7 +34,7 @@ public class Planet{
     }
 
     /** used to calculate the force between two planet  */
-    private double calcForceExertedBy(Planet planet_y){
+    public double calcForceExertedBy(Planet planet_y){
         double distance = this.calcDistance(planet_y);
         double force = G * this.mass * planet_y.mass/distance/distance;
         return force;
@@ -54,7 +53,7 @@ public class Planet{
     }
 
 
-    private double calcForceExertedByX(Planet planet){
+    public double calcForceExertedByX(Planet planet){
         double forcesxx = 0;
         double dx = planet.xxPos - this.xxPos;
     //    double dy = planet.yyPos - this.yyPos;
@@ -75,7 +74,7 @@ public class Planet{
         return forcesyy;
     }
 
-    private double calcForceExertedByY(Planet planet){
+    public double calcForceExertedByY(Planet planet){
         double forcesyy = 0;
     //    double dx = planet.xxPos - this.xxPos;
         double dy = planet.yyPos - this.yyPos;
