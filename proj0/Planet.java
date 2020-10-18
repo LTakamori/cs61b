@@ -1,9 +1,9 @@
 import java.lang.Math; 
 
 public class Planet{
-    public double xxPos, yyPos, xxVel, yyVel, mass;
-    public String imgFileName;
-    static double G = 6.67e-11;
+    private double xxPos, yyPos, xxVel, yyVel, mass;
+    private String imgFileName;
+    private static double G = 6.67e-11;
 
     /** used for construct a Plnaet instance with an existing instance */
     public Planet(Planet p){
@@ -26,7 +26,7 @@ public class Planet{
     }
 
     /** used to calculate the distance between two planet */
-    public double calcDistance(Planet planet_y){
+    private double calcDistance(Planet planet_y){
         double dx = planet_y.xxPos - this.xxPos;
         double dy = planet_y.yyPos - this.yyPos;
         double r_2 = dx * dx + dy *dy;
@@ -35,14 +35,14 @@ public class Planet{
     }
 
     /** used to calculate the force between two planet  */
-    public double calcForceExertedBy(Planet planet_y){
+    private double calcForceExertedBy(Planet planet_y){
         double distance = this.calcDistance(planet_y);
         double force = G * this.mass * planet_y.mass/distance/distance;
         return force;
     }
 
     /**used to calculate the force on x axis */
-    public double calcForceExertedByX(Planet[] planets){
+    private double calcForceExertedByX(Planet[] planets){
         double forcesxx = 0;
         int lengthxx = planets.length;
         for (int i = 0;i < lengthxx; i++){
@@ -54,7 +54,7 @@ public class Planet{
     }
 
 
-    public double calcForceExertedByX(Planet planet){
+    private double calcForceExertedByX(Planet planet){
         double forcesxx = 0;
         double dx = planet.xxPos - this.xxPos;
     //    double dy = planet.yyPos - this.yyPos;
@@ -64,7 +64,7 @@ public class Planet{
     
 
     /**used to calculate the force on y axis */
-    public double calcForceExertedByY(Planet[] planets){
+    private double calcForceExertedByY(Planet[] planets){
         double forcesyy = 0;
         int lengthyy = planets.length;
         for (int i = 0;i < lengthyy; i++){
@@ -75,7 +75,7 @@ public class Planet{
         return forcesyy;
     }
 
-    public double calcForceExertedByY(Planet planet){
+    private double calcForceExertedByY(Planet planet){
         double forcesyy = 0;
     //    double dx = planet.xxPos - this.xxPos;
         double dy = planet.yyPos - this.yyPos;
@@ -84,7 +84,7 @@ public class Planet{
     }
     
     /**used to calculate the net force on x axis(dont include the original planet*/
-    public double calcNetForceExertedByX(Planet[] planets){
+    private double calcNetForceExertedByX(Planet[] planets){
         int length = planets.length;
         double netForcexx = 0;
         for (int i = 0;i < length;i++ ){
@@ -95,7 +95,7 @@ public class Planet{
     }
 
     /**used to calculate the net force on y axis(dont include the original planet*/
-    public double calcNetForceExertedByY(Planet[] planets){
+    private double calcNetForceExertedByY(Planet[] planets){
         int length = planets.length;
         double netForceyy = 0;
         for (int i = 0;i < length;i++ ){
@@ -106,7 +106,7 @@ public class Planet{
     }
 
     /** used to approximately update the position of planet in dt tiem with foce fX&fY on x&y axises */
-    public void update(double dt,double fX,double fY){
+    private void update(double dt,double fX,double fY){
         double ax = fX/this.mass;
         double ay = fY/this.mass;
         this.xxVel = this.xxVel + ax*dt;
@@ -116,7 +116,7 @@ public class Planet{
     }
 
     /** used to draw the planet */
-    public void draw() {
+    private void draw() {
         StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
     }
 }
