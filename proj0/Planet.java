@@ -42,7 +42,7 @@ public class Planet{
     }
 
     /**used to calculate the force on x axis */
-    private double calcForceExertedByX(Planet[] planets){
+    public double calcForceExertedByX(Planet[] planets){
         double forcesxx = 0;
         int lengthxx = planets.length;
         for (int i = 0;i < lengthxx; i++){
@@ -64,7 +64,7 @@ public class Planet{
     
 
     /**used to calculate the force on y axis */
-    private double calcForceExertedByY(Planet[] planets){
+    public double calcForceExertedByY(Planet[] planets){
         double forcesyy = 0;
         int lengthyy = planets.length;
         for (int i = 0;i < lengthyy; i++){
@@ -84,7 +84,7 @@ public class Planet{
     }
     
     /**used to calculate the net force on x axis(dont include the original planet*/
-    private double calcNetForceExertedByX(Planet[] planets){
+    public double calcNetForceExertedByX(Planet[] planets){
         int length = planets.length;
         double netForcexx = 0;
         for (int i = 0;i < length;i++ ){
@@ -95,7 +95,7 @@ public class Planet{
     }
 
     /**used to calculate the net force on y axis(dont include the original planet*/
-    private double calcNetForceExertedByY(Planet[] planets){
+    public double calcNetForceExertedByY(Planet[] planets){
         int length = planets.length;
         double netForceyy = 0;
         for (int i = 0;i < length;i++ ){
@@ -106,7 +106,7 @@ public class Planet{
     }
 
     /** used to approximately update the position of planet in dt tiem with foce fX&fY on x&y axises */
-    private void update(double dt,double fX,double fY){
+    public void update(double dt,double fX,double fY){
         double ax = fX/this.mass;
         double ay = fY/this.mass;
         this.xxVel = this.xxVel + ax*dt;
@@ -116,7 +116,7 @@ public class Planet{
     }
 
     /** used to draw the planet */
-    private void draw() {
+    public void draw() {
         StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
     }
 }
