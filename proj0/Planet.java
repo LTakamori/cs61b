@@ -41,7 +41,7 @@ import java.lang.Math;
     }
 
     /**used to calculate the force on x axis */
-    public double calcForceExertedByX(Planet[] planets){
+    private double calcForceExertedByX(Planet[] planets){
         double forcesxx = 0;
         int lengthxx = planets.length;
         for (int i = 0;i < lengthxx; i++){
@@ -63,7 +63,7 @@ import java.lang.Math;
     
 
     /**used to calculate the force on y axis */
-    public double calcForceExertedByY(Planet[] planets){
+    private double calcForceExertedByY(Planet[] planets){
         double forcesyy = 0;
         int lengthyy = planets.length;
         for (int i = 0;i < lengthyy; i++){
