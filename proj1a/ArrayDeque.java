@@ -1,7 +1,7 @@
 public class ArrayDeque<T> implements Deque<T>{
     private int size;
     private T[] items;
-    private int next_first, next_last, cap;
+    private int next_first, next_last,cap;
     private double taken_ratio;
 
     public ArrayDeque(){
@@ -10,15 +10,15 @@ public class ArrayDeque<T> implements Deque<T>{
         cap = 8;
         next_first = cap/2;
         next_last = (cap/2+1)%cap;
-        taken_ratio = size /cap;
+        taken_ratio = size * 1.0  /cap;
     }
 
 
     private void resize(int new_cap){
-        T[] new_array = (T[])new Object[cap];
-        System.arraycopy(items,0, new_array, 0, new_cap);
+        T[] new_items = (T[])new Object[new_cap];
+        System.arraycopy(items,0, new_items, 0, cap);
         this.cap = new_cap;
-        items = new_array;
+        items = new_items;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ArrayDeque<T> implements Deque<T>{
         next_first = (next_first + 1) % cap;
         T ret = items[next_first];
         items[next_first] = null;
-        taken_ratio = size /cap;
+        taken_ratio = size * 1.0 /cap;
         if (taken_ratio <= 0.25 && size > 8){
             this.resize(cap/2);
         }
@@ -77,7 +77,7 @@ public class ArrayDeque<T> implements Deque<T>{
         next_last = (next_last - 1 +cap) % cap;
         T ret = items[next_last];
         items[next_last] = null;
-        taken_ratio = size /cap;
+        taken_ratio = size * 1.0 /cap;
         if (taken_ratio <= 0.25 && size > 8){
             this.resize(cap/2);
         }
