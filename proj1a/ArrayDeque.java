@@ -60,7 +60,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeFirst(){
-        if ( size == 0 )
+        if (size == 0)
             return null;
         size = size - 1;
         next_first = (next_first + 1) % cap;
@@ -75,7 +75,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeLast(){
-        if ( size == 0 )
+        if (size == 0)
             return null;
         size = size - 1;
         next_last = (next_last - 1 + cap) % cap;
