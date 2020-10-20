@@ -60,10 +60,12 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeFirst(){
+        if ( size == 0 )
+            return null;
         size = size - 1;
         next_first = (next_first + 1) % cap;
         T ret = items[next_first];
-        items[next_first] = null;
+        //items[next_first] = null; if the T is reference type, this will always return null
         taken_ratio = size * 1.0 /cap;
         if (taken_ratio <= 0.25 && size > 8){
             this.resize(cap/2);
@@ -73,10 +75,12 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeLast(){
+        if ( size == 0 )
+            return null;
         size = size - 1;
-        next_last = (next_last - 1 +cap) % cap;
+        next_last = (next_last - 1 + cap) % cap;
         T ret = items[next_last];
-        items[next_last] = null;
+        //items[next_last] = null;
         taken_ratio = size * 1.0 /cap;
         if (taken_ratio <= 0.25 && size > 8){
             this.resize(cap/2);
