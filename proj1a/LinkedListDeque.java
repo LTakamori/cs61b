@@ -2,7 +2,7 @@ public class LinkedListDeque<T> implements Deque<T>{
     private int size;
     private Node sentinel;
 
-    public class Node {
+    private class Node {
         private T item;
         private Node next;
         private Node prev;
@@ -13,9 +13,11 @@ public class LinkedListDeque<T> implements Deque<T>{
             prev = prev_n;
         }
 
-        public T getRecursive_Node(int index){
-            if (index == 0) return item;
-            else return next.getRecursive_Node(index-1);
+        private T getRecursive_Node(int index){
+            if (index == 0)
+                return item;
+            else
+                return next.getRecursive_Node(index-1);
         }
     }
 
@@ -36,12 +38,12 @@ public class LinkedListDeque<T> implements Deque<T>{
     @Override
     public void addLast(T item){
         size = size + 1;
-        sentinel.prev = new Node(item, sentinel.prev, sentinel);
+        sentinel.prev = new Node(item, sentinel, sentinel.prev);
         sentinel.prev.prev.next = sentinel.prev;
     }
 
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return(size == 0);
     }
 
@@ -63,7 +65,8 @@ public class LinkedListDeque<T> implements Deque<T>{
 
     @Override
     public T removeFirst(){
-        if (size == 0) return null;
+        if (size == 0)
+            return null;
         size = size - 1;
         T the_item = sentinel.next.item;
         Node temp = sentinel.next.next;
@@ -74,7 +77,8 @@ public class LinkedListDeque<T> implements Deque<T>{
 
     @Override
     public T removeLast(){
-        if (size == 0) return null;
+        if (size == 0)
+            return null;
         size = size - 1;
         T the_item = sentinel.prev.item;
         Node temp = sentinel.prev.prev;
@@ -85,7 +89,8 @@ public class LinkedListDeque<T> implements Deque<T>{
 
     @Override
     public T get(int index){
-        if(index >= size) return null;
+        if(index >= size)
+            return null;
         Node temp = sentinel.next;
         for(int i= 0; i < index; i++){
             temp = temp.next;
@@ -94,7 +99,8 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     public T getRecursive(int index){
-        if (index >= size) return null;
-        return sentinel.getRecursive_Node(index);
+        if (index >= size)
+            return null;
+        return sentinel.next.getRecursive_Node(index);
     }
 }
