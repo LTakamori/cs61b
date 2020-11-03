@@ -1,4 +1,7 @@
 import org.junit.Test;
+
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -27,24 +30,21 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      * Returns the index of the node to the left of the node at i.
      */
     private static int leftIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return i * 2;
     }
 
     /**
      * Returns the index of the node to the right of the node at i.
      */
     private static int rightIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return i * 2 + 1;
     }
 
     /**
      * Returns the index of the node that is the parent of the node at i.
      */
     private static int parentIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return (i / 2);
     }
 
     /**
@@ -107,8 +107,10 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        /** TODO: Your code here. */
-        return;
+        while (inBounds(parentIndex(index)) && contents[parentIndex(index)].priority() > contents[index].priority()){
+            swap(parentIndex(index),index);
+            index = parentIndex(index);
+        }
     }
 
     /**
@@ -118,8 +120,29 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        /** TODO: Your code here. */
-        return;
+        while (inBounds(leftIndex(index)) || inBounds(rightIndex(index))){
+            if (inBounds(rightIndex(index))){
+                if (contents[index].priority() <= contents[leftIndex(index)].priority()
+                        && contents[index].priority() <= contents[rightIndex(index)].priority()) {
+                    break;
+                }else{
+                    if (contents[leftIndex(index)].priority() < contents[rightIndex(index)].priority()){
+                        swap(index, leftIndex(index));
+                        index = leftIndex(index);
+                    }else{
+                        swap(index, rightIndex(index));
+                        index = rightIndex(index);
+                    }
+                }
+            }else{
+                if (contents[index].priority() > contents[leftIndex(index)].priority()){
+                    swap(index, leftIndex(index));
+                }else{
+                    break;
+                }
+            }
+        }
+
     }
 
     /**
@@ -133,7 +156,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             resize(contents.length * 2);
         }
 
-        /* TODO: Your code here! */
+        size = size + 1;
+
+        int index = size;
+        contents[index] = new Node(item, priority);
+        swim(index);
     }
 
     /**
@@ -142,8 +169,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T peek() {
-        /* TODO: Your code here! */
-        return null;
+        if (size == 0)
+            return null;
+        return contents[1].myItem;
     }
 
     /**
@@ -157,8 +185,14 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
-        /* TODO: Your code here! */
-        return null;
+        if (size == 0)
+            return null;
+        T ret = contents[1].myItem;
+        swap(1, size);
+        contents[size] = null;
+        size = size - 1;
+        sink(1);
+        return ret;
     }
 
     /**
@@ -180,8 +214,17 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-        /* TODO: Your code here! */
-        return;
+        for (int i = 1; i < size; i++){
+            if (contents[i].myItem.equals(item)){
+                if (contents[i].myPriority < priority){
+                    contents[i].myPriority = priority;
+                    swim(i);
+                }else{
+                    contents[i].myPriority = priority;
+                    sink(i);
+                }
+            }
+        }
     }
 
     /**
