@@ -35,6 +35,8 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
         queue.add(current);
 
         if(current == t){
+            marked[current] = true;
+            targetFound = true;
             announce();
             return;
         }
