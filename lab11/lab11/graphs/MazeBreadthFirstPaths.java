@@ -31,18 +31,16 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
     private void bfs() {
         // TODO: Your code here. Don't forget to update distTo, edgeTo, and marked, as well as call announce()
         int current = s;
+        marked[current] = true;
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(current);
-        //marked[current] = true;
-        //announce();
-        /**
-        if(current == t){
-            marked[current] = true;
+        announce();
+
+        if(current == t) {
             targetFound = true;
             announce();
             return;
         }
-         */
 
         while (!queue.isEmpty()) {
             current = queue.remove();
