@@ -33,15 +33,16 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
         int current = s;
         Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(current);
-        marked[current] = true;
-        announce();
-
+        //marked[current] = true;
+        //announce();
+        /**
         if(current == t){
             marked[current] = true;
             targetFound = true;
             announce();
             return;
         }
+         */
 
         while (!queue.isEmpty()) {
             current = queue.remove();
