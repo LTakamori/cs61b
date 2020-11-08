@@ -23,7 +23,7 @@ public class TestClorus {
     public void testBasics() {
         Clorus c = new Clorus(2);
         assertEquals(2, c.energy(), 0.01);
-        assertEquals(new Color(32, 0, 231), c.color());
+        assertEquals(new Color(34, 0, 231), c.color());
     }
 
     @Test
